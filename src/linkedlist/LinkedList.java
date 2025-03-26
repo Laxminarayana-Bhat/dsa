@@ -60,14 +60,23 @@ public class LinkedList {
         }
     }
 
-    public void append(int elem){
-        Node node=new Node(elem);
-        if(length==0){
-            head=node;
-        }else {
-            tail.next=node;
+    public void append(int value) {
+        // Create a new node with the given value
+        Node newNode = new Node(value);
+        // If the list is empty, have both head and tail
+        // point at the new node.
+        // The LL could be come empty if the original node was removed.
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            // If the list is not empty, set the next node of the
+            // current tail to the new node
+            // and update the tail to be the new node
+            tail.next = newNode;
+            tail = newNode;
         }
-        tail=node;
+        // Increment the length of the list
         length++;
     }
 
