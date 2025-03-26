@@ -4,5 +4,7 @@ public class Main {
     public static void main(String[] args) {
         LinkedList linkedList=new LinkedList(1);
         linkedList.printList();//printing the list
+        linkedList.append(4);
+        linkedList.printList();
     }
 }

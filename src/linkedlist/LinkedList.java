@@ -23,25 +23,6 @@ public class LinkedList {
     }
 
 
-    //   +===================================================+
-    //   |                  WRITE YOUR CODE HERE             |
-    //   | Description:                                      |
-    //   | - Constructor for the LinkedList class.           |
-    //   | - Initializes the linked list with a single node. |
-    //   |                                                   |
-    //   | Parameters:                                       |
-    //   | - value: The integer value of the first node in   |
-    //   |   the newly created linked list.                  |
-    //   |                                                   |
-    //   | Behavior:                                         |
-    //   | - A new Node is created with the given value.     |
-    //   | - This node is set as both the head and tail of   |
-    //   |   the list, indicating it is the only node in the |
-    //   |   list at creation.                               |
-    //   | - The length of the list is initialized to 1.     |
-    //   +===================================================+
-
-
     public Node getHead() {
         return head;
     }
@@ -55,10 +36,10 @@ public class LinkedList {
     }
 
     public void printList() {
-        Node temp = head;
-        while (temp != null) {
+        Node temp=head;
+        while (temp!=null){
             System.out.println(temp.value);
-            temp = temp.next;
+            temp=temp.next;
         }
     }
 
@@ -77,6 +58,17 @@ public class LinkedList {
         } else {
             printList();
         }
+    }
+
+    public void append(int elem){
+        Node node=new Node(elem);
+        if(length==0){
+            head=node;
+        }else {
+            tail.next=node;
+        }
+        tail=node;
+        length++;
     }
 
 }
