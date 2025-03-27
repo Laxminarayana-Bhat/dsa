@@ -5,6 +5,8 @@ public class Main {
         LinkedList linkedList=new LinkedList(1);
         linkedList.printList();//printing the list
         linkedList.append(4);
+        linkedList.append(5);
+        linkedList.removeLast();
         linkedList.printList();
     }
 }

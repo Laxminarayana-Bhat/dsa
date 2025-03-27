@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.util.Base64;
+
 public class LinkedList {
 
     private Node head;
@@ -15,11 +17,11 @@ public class LinkedList {
         }
     }
 
-    public LinkedList(int value){
-        Node node=new Node(value);
-        this.head=node;
-        this.tail=node;
-        this.length=1;
+    public LinkedList(int value) {
+        Node node = new Node(value);
+        this.head = node;
+        this.tail = node;
+        this.length = 1;
     }
 
 
@@ -36,10 +38,10 @@ public class LinkedList {
     }
 
     public void printList() {
-        Node temp=head;
-        while (temp!=null){
+        Node temp = head;
+        while (temp != null) {
             System.out.println(temp.value);
-            temp=temp.next;
+            temp = temp.next;
         }
     }
 
@@ -78,6 +80,49 @@ public class LinkedList {
         }
         // Increment the length of the list
         length++;
+    }
+
+//    public Node removeLast() {
+//        if (length == 0) return null;
+//
+//        Node pre = head;
+//        Node temp = head;
+//        while (temp.next != null) {
+//            pre = temp;
+//            temp = temp.next;
+//        }
+//        tail = pre;
+//        tail.next = null;
+//        length--;
+//
+//        if (length == 0) {
+//            head = null;
+//            tail = null;
+//        }
+//        return temp;
+//    }
+
+    public Node removeLast() {
+        if (length == 0) return null;
+        if (length == 1) {
+            Node temp = head;
+            head = null;
+            tail = null;
+            length--;
+            return temp;
+        } else {
+            Node temp = head;
+            while (temp.next.next != null) {
+                temp = temp.next;
+                System.out.println(temp.value+"val");
+            }
+            Node lastNode = temp.next;
+            System.out.println(lastNode.value+"lasst");
+            temp.next = null;
+            tail = temp;
+            length--;
+            return lastNode;
+        }
     }
 
 }
