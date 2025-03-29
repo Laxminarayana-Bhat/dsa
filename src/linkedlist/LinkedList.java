@@ -4,10 +4,10 @@ public class LinkedList {
 
     private Node head;
     private Node tail;
-    private int length;
+    public int length;
 
-    class Node {
-        int value;
+    public class Node {
+        public int value;
         Node next;
 
         public Node(int value) {
@@ -145,8 +145,8 @@ public class LinkedList {
         return temp;
     }
 
-    public int get(int index) {
-        if (index < 0 || index > length - 1) return -1;
+    public Node get(int index) {
+        if (index < 0 || index > length - 1) return null;
 //        int count=0;
         Node temp = head;
         long initial = System.currentTimeMillis();
@@ -161,7 +161,16 @@ public class LinkedList {
 //            temp=temp.next;
 //            count++;
 //        }
-        return temp.value;
+        return temp;
+    }
+
+    public boolean set(int index, int value) {
+        Node temp = get(index);
+        if (temp!=null){
+            temp.value=value;
+            return true;
+        }
+        return false;
     }
 
 }
