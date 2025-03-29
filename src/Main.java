@@ -9,7 +9,6 @@ public class Main {
         linkedList.removeLast();
         linkedList.prepend(10);
         linkedList.printList();
-        linkedList.removeFirst();
-        linkedList.printList();
+        System.out.println(linkedList.get(2));
     }
 }

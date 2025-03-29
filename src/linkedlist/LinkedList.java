@@ -1,9 +1,5 @@
 package linkedlist;
 
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.Set;
-
 public class LinkedList {
 
     private Node head;
@@ -147,6 +143,25 @@ public class LinkedList {
         length--;
         if (length == 0) tail = null;
         return temp;
+    }
+
+    public int get(int index) {
+        if (index < 0 || index > length - 1) return -1;
+//        int count=0;
+        Node temp = head;
+        long initial = System.currentTimeMillis();
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        System.out.println("total - " + (System.currentTimeMillis() - initial));
+//        if (count==index){
+//            return temp.value;
+//        }
+//        while(count!=index && head.next!=null){
+//            temp=temp.next;
+//            count++;
+//        }
+        return temp.value;
     }
 
 }
