@@ -196,15 +196,29 @@ public class LinkedList {
         if (index == 0) return removeFirst();
         if (index == length - 1) return removeLast();
 
-        Node prev=get(index-1);
-        Node removable=prev.next;
-        prev.next=removable.next;
-        removable.next=null;
+        Node prev = get(index - 1);
+        Node removable = prev.next;
+        prev.next = removable.next;
+        removable.next = null;
         length--;
 
         return removable;
 
 
+    }
+
+    public void reverse() {
+        Node temp = head;
+        head = tail;
+        tail = temp;
+        Node before = null;
+        Node after;
+        for (int i = 0; i < length; i++) {
+            after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
     }
 
 }

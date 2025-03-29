@@ -17,5 +17,7 @@ public class Main {
         linkedList.remove(3);
         System.out.println("---");
         linkedList.printList();
+        linkedList.reverse();
+        linkedList.printList();
     }
 }
