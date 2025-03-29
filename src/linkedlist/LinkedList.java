@@ -1,6 +1,8 @@
 package linkedlist;
 
 import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LinkedList {
 
@@ -123,6 +125,18 @@ public class LinkedList {
             length--;
             return lastNode;
         }
+    }
+
+    public void prepend(int elem){
+        Node node=new Node(elem);
+        if(length==0){
+            head=node;
+            tail=node;
+            return;
+        }
+        node.next=head;
+        head=node;
+        length++;
     }
 
 }
