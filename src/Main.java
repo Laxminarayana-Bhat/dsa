@@ -11,6 +11,8 @@ public class Main {
         linkedList.prepend(10);
         System.out.println(linkedList.get(2).value);
         linkedList.set(2, 101);
+        System.out.println(linkedList.insert(4,123));
+        linkedList.insert(3,123);
         linkedList.printList();
     }
 }

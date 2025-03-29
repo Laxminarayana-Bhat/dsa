@@ -166,11 +166,29 @@ public class LinkedList {
 
     public boolean set(int index, int value) {
         Node temp = get(index);
-        if (temp!=null){
-            temp.value=value;
+        if (temp != null) {
+            temp.value = value;
             return true;
         }
         return false;
+    }
+
+    public boolean insert(int index, int value) {
+        if (index > length || index < 0) return false;
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+        if (index == length) {
+            append(value);
+            return true;
+        }
+        Node node = new Node(value);
+        Node temp = get(index - 1);
+        node.next = temp.next;
+        temp.next = node;
+        length++;
+        return true;
     }
 
 }
