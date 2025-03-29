@@ -116,10 +116,10 @@ public class LinkedList {
             Node temp = head;
             while (temp.next.next != null) {
                 temp = temp.next;
-                System.out.println(temp.value+"val");
+                System.out.println(temp.value + "val");
             }
             Node lastNode = temp.next;
-            System.out.println(lastNode.value+"lasst");
+            System.out.println(lastNode.value + "lasst");
             temp.next = null;
             tail = temp;
             length--;
@@ -127,16 +127,26 @@ public class LinkedList {
         }
     }
 
-    public void prepend(int elem){
-        Node node=new Node(elem);
-        if(length==0){
-            head=node;
-            tail=node;
+    public void prepend(int elem) {
+        Node node = new Node(elem);
+        if (length == 0) {
+            head = node;
+            tail = node;
             return;
         }
-        node.next=head;
-        head=node;
+        node.next = head;
+        head = node;
         length++;
+    }
+
+    public Node removeFirst() {
+        if (length == 0) return null;
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if (length == 0) tail = null;
+        return temp;
     }
 
 }
