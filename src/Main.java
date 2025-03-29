@@ -14,5 +14,8 @@ public class Main {
         System.out.println(linkedList.insert(4,123));
         linkedList.insert(3,123);
         linkedList.printList();
+        linkedList.remove(3);
+        System.out.println("---");
+        linkedList.printList();
     }
 }

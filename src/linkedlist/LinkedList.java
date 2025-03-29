@@ -191,5 +191,21 @@ public class LinkedList {
         return true;
     }
 
+    public Node remove(int index) {
+        if (index < 0 || index > length - 1) return null;
+        if (index == 0) return removeFirst();
+        if (index == length - 1) return removeLast();
+
+        Node prev=get(index-1);
+        Node removable=prev.next;
+        prev.next=removable.next;
+        removable.next=null;
+        length--;
+
+        return removable;
+
+
+    }
+
 }
 
