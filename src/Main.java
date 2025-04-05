@@ -3,20 +3,10 @@ import linkedlist.*;
 
 public class Main {
     public static void main(String[] args) {
-        DoublyLinkedList dLL=new DoublyLinkedList(1);
+        DoublyLinkedList dLL = new DoublyLinkedList(1);
         dLL.append(2);
+        System.out.println(dLL.removeLast());
         dLL.printList();
-
-
-
-
-
-
-
-
-
-
-
 
 
 

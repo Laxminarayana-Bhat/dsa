@@ -5,10 +5,10 @@ public class DoublyLinkedList {
     public Node tail;
     public int length;
 
-    public class Node {
-        int value;
-        Node next;
-        Node previous;
+    public static class Node {
+        public int value;
+        public Node next;
+        public Node previous;
 
         public Node(int val) {
             this.value = val;
@@ -43,5 +43,21 @@ public class DoublyLinkedList {
         }
         tail = node;
         length++;
+    }
+
+    public Node removeLast() {
+        if (length == 0) {
+            return null;
+        }
+        Node temp = tail;
+        tail = tail.previous;
+        tail.next = null;
+        temp.previous = null;
+        length--;
+        if (length == 0) {
+            head = null;
+            tail = null;
+        }
+        return temp;
     }
 }
