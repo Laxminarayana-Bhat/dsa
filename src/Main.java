@@ -9,6 +9,9 @@ public class Main {
         dLL.prepend(10);
         System.out.println(dLL.removeFirst());
         System.out.println(dLL.get(0).value);
+        System.out.println(dLL.set(0,111));
+        System.out.println(dLL.insert(1,102));
+        System.out.println(dLL.remove(1).value);
         dLL.printList();
 
 

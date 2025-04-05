@@ -89,19 +89,65 @@ public class DoublyLinkedList {
         return temp;
     }
 
-    public Node get(int index){
-        if (index<0||index>=length) return null;
-        Node temp=head;
-        if (index<length/2){
-            for (int i=0;i<length;i++){
-                temp=temp.next;
+    public Node get(int index) {
+        if (index < 0 || index >= length) return null;
+        Node temp = head;
+        if (index < length / 2) {
+            for (int i = 0; i < length; i++) {
+                temp = temp.next;
             }
-        }else{
-            temp=tail;
-            for (int i=length-1;i>index;i--){
-                temp=temp.previous;
+        } else {
+            temp = tail;
+            for (int i = length - 1; i > index; i--) {
+                temp = temp.previous;
             }
         }
+        return temp;
+    }
+
+    public boolean set(int index, int val) {
+        Node temp = get(index);
+        if (temp != null) {
+            temp.value = val;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean insert(int index, int value) {
+        if (index < 0 || index > length) return true;
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+        if (index == length) {
+            append(value);
+            return true;
+        }
+        Node newN = new Node(value);
+        Node bef = get(index - 1);
+        Node aft = bef.next;
+        newN.previous = bef;
+        newN.next = aft;
+        bef.next = newN;
+        aft.previous = newN;
+        length++;
+        return true;
+    }
+
+    public Node remove(int index) {
+        if (index < 0 || index >= length) return null;
+        if (index == 0) return removeFirst();
+        if (index == length - 1) return removeLast();
+
+        Node temp = get(index);
+
+        temp.next.previous = temp.previous;
+        temp.previous.next = temp.next;
+        temp.next = null;
+        temp.previous = null;
+
+        length--;
         return temp;
     }
 }
