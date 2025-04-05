@@ -7,6 +7,8 @@ public class Main {
         dLL.append(2);
         System.out.println(dLL.removeLast());
         dLL.prepend(10);
+        System.out.println(dLL.removeFirst());
+        System.out.println(dLL.get(0).value);
         dLL.printList();
 
 
