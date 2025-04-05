@@ -60,4 +60,17 @@ public class DoublyLinkedList {
         }
         return temp;
     }
+
+    public void prepend(int val) {
+        Node newN = new Node(val);
+        if (length == 0) {
+            head = newN;
+            tail = newN;
+        } else {
+            head.previous = newN;
+            newN.next = head;
+            head = newN;
+        }
+        length++;
+    }
 }
