@@ -270,4 +270,43 @@ public class DoublyLinkedList {
         // Ensure the new head's 'prev' is null, indicating the start of list.
         if (head != null) head.previous = null;
     }
+
+    //gpt
+    public void swapPairs() {
+        if(length<2)return;
+        // Step 1: Create a dummy node
+        Node dummyNode = new Node(0);
+        dummyNode.next = head;
+        if (head != null) {
+            head.previous = dummyNode;
+        }
+
+        Node previousNode = dummyNode;
+        Node current = head;
+
+        // Step 2: Iterate through the list
+        while (current != null && current.next != null) {
+            Node firstNode = current;
+            Node secondNode = current.next;
+            Node nextPair = secondNode.next;
+
+            // Step 3: Swap the pair
+            previousNode.next = secondNode;
+            secondNode.previous = previousNode;
+            secondNode.next = firstNode;
+            firstNode.previous = secondNode;
+            firstNode.next = nextPair;
+            if (nextPair != null) {
+                nextPair.previous = firstNode;
+            }
+
+            // Step 4: Move to the next pair
+            previousNode = firstNode;
+            current = nextPair;
+        }
+
+        // Step 5: Update the head of the list
+        head = dummyNode.next;
+        head.previous = null;  // Make sure head's prev is null
+    }
 }
