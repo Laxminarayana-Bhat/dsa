@@ -150,4 +150,12 @@ public class DoublyLinkedList {
         length--;
         return temp;
     }
+
+    public void swapFirstLast() {
+        if (length < 2) return;
+        int temp = head.value;
+        head.value = tail.value;
+        tail.value = temp;
+        //to swap first and last just swap their values as reference will be same for head and tail
+    }
 }
