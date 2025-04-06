@@ -195,4 +195,79 @@ public class DoublyLinkedList {
         head = tail;   // Update head to be the original tail
         tail = temp;   // Update tail to be what was originally the head
     }
+
+    //used 2 pointer approach l[0] == r[len-1] l++ r--
+    public boolean isPalindrome() {
+        if (length == 0 || length == 1) return true;
+        Node l = head;
+        Node r = tail;
+        while (l != r) {
+            if (l.value == r.value) {
+                l = l.next;
+                r = r.previous;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void swapNodePairs() {
+        // Create a placeholder (dummyNode) node to simplify swapping.
+        Node dummyNode = new Node(0);
+
+        // Link the dummyNode node to the start of our list.
+        dummyNode.next = head;
+
+        // Initialize 'previousNode' to 'dummyNode' to remember the node
+        // before each pair we're swapping.
+        Node previousNode = dummyNode;
+
+        // Continue as long as there's a pair of nodes to swap.
+        while (head != null && head.next != null) {
+
+            // Identify the first node of the pair to swap.
+            Node firstNode = head;
+
+            // Identify the second node of the pair to swap.
+            Node secondNode = head.next;
+
+            // Connect the previousNode's 'next' pointer to secondNode,
+            // essentially skipping over firstNode.
+            previousNode.next = secondNode;
+
+            // Connect firstNode to the node after secondNode.
+            // This ensures we don't lose the rest of the list.
+            firstNode.next = secondNode.next;
+
+            // Connect secondNode back to firstNode,
+            // completing the swap.
+            secondNode.next = firstNode;
+
+            // Adjust 'prev' pointers for our doubly linked list.
+            // Set secondNode's 'prev' to the node before current pair.
+            secondNode.previous = previousNode;
+
+            // Set firstNode's 'prev' to secondNode as they've been swapped.
+            firstNode.previous = secondNode;
+
+            // If there's a node after our current pair, set its 'prev' to firstNode.
+            if (firstNode.next != null) {
+                firstNode.next.previous = firstNode;
+            }
+
+            // Move the head pointer to the node after the current pair.
+            head = firstNode.next;
+
+            // Update 'previousNode' for the next pair of nodes.
+            previousNode = firstNode;
+        }
+
+        // After swapping all pairs, update our list's head to
+        // start at the node after dummyNode.
+        head = dummyNode.next;
+
+        // Ensure the new head's 'prev' is null, indicating the start of list.
+        if (head != null) head.previous = null;
+    }
 }
