@@ -1,5 +1,10 @@
 package linkedlist;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class DoublyLinkedList {
     public Node head;
     public Node tail;
@@ -310,3 +315,38 @@ public class DoublyLinkedList {
         head.previous = null;  // Make sure head's prev is null
     }
 }
+
+class LRUCache {
+    // Cache to store key-value pairs with access order
+    private final LinkedHashMap<Integer, Integer> cache;
+    private final int capacity;
+
+    // Constructor to initialize the cache with given capacity
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.cache = new LinkedHashMap<>(capacity, 0.75f, true) {
+            // Override to define the eviction policy
+            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+                return size() > capacity;
+                //builtin method
+            }
+        };
+    }
+
+    // Method to retrieve a value from the cache
+    public int get(int key) {
+        return cache.getOrDefault(key, -1);  // Return -1 if key is not present
+    }
+
+    // Method to insert or update a key-value pair in the cache
+    public void put(int key, int value) {
+        cache.put(key, value);  // Updates value if key exists or adds new key-value
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
