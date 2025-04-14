@@ -1,17 +1,20 @@
-import linkedlist.*;
-import stack.StackLL;
+import queue.QueueLL;
 
 
 public class Main {
     public static void main(String[] args) {
-        StackLL stackLL=new StackLL(1);
-        stackLL.push(2);
+        QueueLL queueLL = new QueueLL(1);
+        queueLL.enQueue(2);
+        queueLL.enQueue(3);
+        queueLL.enQueue(4);
+        System.out.println(queueLL.deQueue().value + " - removed");
+        queueLL.printList();
 
 
-        stackLL.pop();
-        stackLL.printStack();
-
-
+//        StackLL stackLL=new StackLL(1);
+//        stackLL.push(2);
+//        stackLL.pop();
+//        stackLL.printStack();
 
 
 //        DoublyLinkedList dLL = new DoublyLinkedList(1);
