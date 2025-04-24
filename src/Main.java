@@ -1,14 +1,28 @@
+import binarysearchtree.BinarySearchTree;
 import queue.QueueLL;
+
+import java.util.Arrays;
 
 
 public class Main {
     public static void main(String[] args) {
-        QueueLL queueLL = new QueueLL(1);
-        queueLL.enQueue(2);
-        queueLL.enQueue(3);
-        queueLL.enQueue(4);
-        System.out.println(queueLL.deQueue().value + " - removed");
-        queueLL.printList();
+
+        BinarySearchTree binarySearchTree=new BinarySearchTree();
+        System.out.println(binarySearchTree.root);
+
+
+
+
+
+
+
+
+//        QueueLL queueLL = new QueueLL(1);
+//        queueLL.enQueue(2);
+//        queueLL.enQueue(3);
+//        queueLL.enQueue(4);
+//        System.out.println(queueLL.deQueue().value + " - removed");
+//        queueLL.printList();
 
 
 //        StackLL stackLL=new StackLL(1);
