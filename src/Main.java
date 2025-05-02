@@ -1,20 +1,21 @@
-import binarysearchtree.BinarySearchTree;
-import queue.QueueLL;
-
-import java.util.Arrays;
+import hashtable.HashTable;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        BinarySearchTree binarySearchTree = new BinarySearchTree();
-        binarySearchTree.insert(20);
-        System.out.println(binarySearchTree.root.value);
-        binarySearchTree.insert(30);
-        binarySearchTree.insert(25);
-        binarySearchTree.insert(0);
-        System.out.println(binarySearchTree.root.right.left.value);
-        System.out.println(binarySearchTree.contains(2));
+        HashTable hashTable = new HashTable();
+        hashTable.printTable();
+
+
+//        BinarySearchTree binarySearchTree = new BinarySearchTree();
+//        binarySearchTree.insert(20);
+//        System.out.println(binarySearchTree.root.value);
+//        binarySearchTree.insert(30);
+//        binarySearchTree.insert(25);
+//        binarySearchTree.insert(0);
+//        System.out.println(binarySearchTree.root.right.left.value);
+//        System.out.println(binarySearchTree.contains(2));
 
 
 //        QueueLL queueLL = new QueueLL(1);
