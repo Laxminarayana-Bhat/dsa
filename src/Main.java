@@ -5,7 +5,12 @@ public class Main {
     public static void main(String[] args) {
 
         HashTable hashTable = new HashTable();
+        hashTable.set("abcd", 1);
+        hashTable.set("abcd", 2);
+        hashTable.set("mango", 289);
         hashTable.printTable();
+        System.out.println(hashTable.get("abcd"));
+        System.out.println(hashTable.keys());
 
 
 //        BinarySearchTree binarySearchTree = new BinarySearchTree();
