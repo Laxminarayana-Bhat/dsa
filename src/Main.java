@@ -1,5 +1,4 @@
 import graph.Graph;
-import hashtable.HashTable;
 
 
 public class Main {
@@ -11,8 +10,9 @@ public class Main {
         graph.addVertex("30");
         graph.addEdge("10", "20");
         graph.addEdge("10", "30");
-        graph.addEdge("20","30");
-        graph.removeEdge("10","30");
+        graph.addEdge("20", "30");
+        graph.removeEdge("10", "30");
+        graph.removeVertex("10");
         graph.printGraph();
 
 

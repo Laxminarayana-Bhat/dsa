@@ -44,4 +44,27 @@ public class Graph {
         }
         return false;
     }
+
+//    public boolean removeVertexNotEfficient(String vertex) {//It loops all the vertices and that's unnecessary
+//        if (adjacencyList.containsKey(vertex)) {
+//            for (List<String> neighbors : adjacencyList.values()) {
+//                neighbors.remove(vertex);
+//            }
+//            adjacencyList.remove(vertex);
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public boolean removeVertex(String vertex) {
+        if (adjacencyList.get(vertex) == null) {
+            return false;
+        } else {
+            for (String vertices : adjacencyList.get(vertex)) {
+                adjacencyList.get(vertices).remove(vertex);
+            }
+            adjacencyList.remove(vertex);
+            return true;
+        }
+    }
 }
