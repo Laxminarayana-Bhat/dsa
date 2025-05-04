@@ -1,16 +1,28 @@
+import graph.Graph;
 import hashtable.HashTable;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        HashTable hashTable = new HashTable();
-        hashTable.set("abcd", 1);
-        hashTable.set("abcd", 2);
-        hashTable.set("mango", 289);
-        hashTable.printTable();
-        System.out.println(hashTable.get("abcd"));
-        System.out.println(hashTable.keys());
+        Graph graph = new Graph();
+        graph.addVertex("10");
+        graph.addVertex("20");
+        graph.addVertex("30");
+        graph.addEdge("10", "20");
+        graph.addEdge("10", "30");
+        graph.addEdge("20","30");
+        graph.removeEdge("10","30");
+        graph.printGraph();
+
+
+//        HashTable hashTable = new HashTable();
+//        hashTable.set("abcd", 1);
+//        hashTable.set("abcd", 2);
+//        hashTable.set("mango", 289);
+//        hashTable.printTable();
+//        System.out.println(hashTable.get("abcd"));
+//        System.out.println(hashTable.keys());
 
 
 //        BinarySearchTree binarySearchTree = new BinarySearchTree();
