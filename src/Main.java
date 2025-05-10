@@ -1,19 +1,34 @@
 import graph.Graph;
+import heap.Heap;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        Graph graph = new Graph();
-        graph.addVertex("10");
-        graph.addVertex("20");
-        graph.addVertex("30");
-        graph.addEdge("10", "20");
-        graph.addEdge("10", "30");
-        graph.addEdge("20", "30");
-        graph.removeEdge("10", "30");
-        graph.removeVertex("10");
-        graph.printGraph();
+        Heap heap = new Heap();
+        heap.insert(12);
+        heap.insert(120);
+        System.out.println(heap.getHeap());
+        heap.insert(12);
+        heap.insert(100);
+        System.out.println(heap.getHeap());
+
+
+
+//        Graph graph = new Graph();
+//        graph.addVertex("10");
+//        graph.addVertex("20");
+//        graph.addVertex("30");
+//        graph.addEdge("10", "20");
+//        graph.addEdge("10", "30");
+//        graph.addEdge("20", "30");
+//        graph.removeEdge("10", "30");
+//        graph.removeVertex("10");
+//        graph.printGraph();
 
 
 //        HashTable hashTable = new HashTable();
