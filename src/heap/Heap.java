@@ -1,10 +1,13 @@
 package heap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Heap {
-    private List<Integer> heap;
+
+    //O(log n)
+    private final List<Integer> heap;
 
     public Heap() {
         this.heap = new ArrayList<>();
@@ -38,6 +41,35 @@ public class Heap {
         while (currentIdx > 0 && heap.get(currentIdx) > heap.get(parent(currentIdx))) {
             swapIndex(currentIdx, parent(currentIdx));
             currentIdx = parent(currentIdx);
+        }
+    }
+
+    public Integer remove() {
+        if (heap.isEmpty()) return null;
+        if (heap.size() == 1) return heap.remove(0);
+        int maxVal = heap.get(0);
+        heap.set(0, heap.remove(heap.size() - 1));
+        sinkDown(0);
+        return maxVal;
+    }
+
+    private void sinkDown(int index) {
+        int maxIndex = index;
+        while (true) {
+            int leftIndex = leftChild(index);
+            int rightIndex = rightChild(index);
+            if (leftIndex < heap.size() && heap.get(leftIndex) > heap.get(maxIndex)) {
+                maxIndex = leftIndex;
+            }
+            if (rightIndex < heap.size() && heap.get(rightIndex) > heap.get(maxIndex)) {
+                maxIndex = rightIndex;
+            }
+            if (maxIndex != index) {
+                swapIndex(index, maxIndex);
+                index = maxIndex;
+            } else {
+                return;
+            }
         }
     }
 }
