@@ -1,9 +1,4 @@
-import graph.Graph;
 import heap.Heap;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {
@@ -22,7 +17,6 @@ public class Main {
         System.out.println(heap.getHeap());
         heap.remove();
         System.out.println(heap.getHeap());
-
 
 
 //        Graph graph = new Graph();
