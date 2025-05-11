@@ -7,7 +7,7 @@ import java.util.List;
 public class Heap {
 
     //O(log n)
-    private final List<Integer> heap;
+    private List<Integer> heap;
 
     public Heap() {
         this.heap = new ArrayList<>();
@@ -70,6 +70,58 @@ public class Heap {
             } else {
                 return;
             }
+        }
+    }
+
+    private void insertMinHeap(int value) {
+        heap.add(value);
+        int index = heap.size() - 1;
+        while (index > 0 && heap.get(index) < heap.get(parent(index))) {
+            swapIndex(index, parent(index));
+            index = parent(index);
+        }
+    }
+
+    public Integer removeFromMinHeap() {
+        if (heap.isEmpty()) return null;
+        if (heap.size() == 1) return heap.remove(0);
+        Integer elem = heap.set(0, heap.remove(heap.size() - 1));
+        sinkDownMinHeap(0);
+        return elem;
+    }
+
+    public void sinkDownMinHeap(int index) {
+        int swappableIndex = index;
+        while (true) {
+            int n = heap.size();
+            int left = leftChild(index);
+            int right = rightChild(index);
+            if (left < n && heap.get(index) > heap.get(left)) {
+                swappableIndex = left;
+            }
+            if (right < n && heap.get(index) > heap.get(right)) {
+                swappableIndex = right;
+            }
+            if (swappableIndex != index) {
+                swapIndex(index, swappableIndex);
+                index = swappableIndex;
+            } else return;
+        }
+    }
+
+    public void convertToMinHeap() {
+        List<Integer> minHeap = new ArrayList<>(getHeap());
+        heap = new ArrayList<>();
+        for (int i : minHeap) {
+            insertMinHeap(i);
+        }
+    }
+
+    public void convertToMaxHeap() {
+        List<Integer> maxHeap = new ArrayList<>(getHeap());
+        heap = new ArrayList<>();
+        for (int i : maxHeap) {
+            insert(i);
         }
     }
 }

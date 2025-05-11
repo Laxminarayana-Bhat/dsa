@@ -13,9 +13,9 @@ public class Main {
         heap.insert(50);
         heap.insert(65);
         System.out.println(heap.getHeap());
-        heap.remove();
+        heap.convertToMinHeap();
         System.out.println(heap.getHeap());
-        heap.remove();
+        heap.convertToMaxHeap();
         System.out.println(heap.getHeap());
 
 
