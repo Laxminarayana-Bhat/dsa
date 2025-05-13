@@ -4,6 +4,12 @@ import java.util.*;
 
 public class Heap {
 
+    //PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0])); - min heap
+    //PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(b[0], a[0])); - max heap
+    //To create a PriorityQueue of int[] arrays without a comparator. Since int[] does not implement Comparable, Java throws:
+    //ClassCastException: class [I cannot be cast to class java.lang.Comparable
+    //This happens because Java needs to know how to compare int[] objects, and it doesn't know what to do unless you explicitly tell it with a comparator
+
     //O(log n)
     private List<Integer> heap;
 
