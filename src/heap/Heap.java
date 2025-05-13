@@ -1,9 +1,6 @@
 package heap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Heap {
 
@@ -172,5 +169,19 @@ public class Heap {
             pq.poll();
         }
         return pq.poll();
+    }
+
+    public int[][] kClosest(int[][] points, int k) {
+        int[][] ans=new int[k][2];
+        PriorityQueue<int[]> pq=new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
+        for(int i=0;i<points.length;i++){
+            int l=points[i][0];
+            int r=points[i][1];
+            pq.offer(new int[]{(l*l+r*r),i});
+        }
+        for(int i=0;i<k;i++){
+            ans[i]=points[Objects.requireNonNull(pq.poll())[1]];
+        }
+        return ans;
     }
 }
