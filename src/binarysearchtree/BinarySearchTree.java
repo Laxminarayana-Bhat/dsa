@@ -81,5 +81,36 @@ public class BinarySearchTree {
         return currentNode;
     }
 
+    public void deleteNode(int value) {
+        deleteNode(root, value);
+    }
 
+    private Node deleteNode(Node currentNode, int value) {
+        if (currentNode == null) return null;
+        if (currentNode.value < value) {
+            currentNode.right = deleteNode(currentNode.right, value);
+        } else if (currentNode.value > value) {
+            currentNode.left = deleteNode(currentNode.left, value);
+        } else {//4 scenario if to be deleted node has->1. no node below,2. node on left,3. node on right,4. node on both side
+            if (currentNode.left == null && currentNode.right == null) {
+                return null;//null will be set to previous rec call
+            } else if (currentNode.left == null) {
+                currentNode = currentNode.right;//3-right node will be set and to be delete node is out of pointer
+            } else if (currentNode.right == null) {
+                currentNode = currentNode.left;//2-left node will be set and to be delete node is out of pointer
+            } else {//swap with the smallest in the subtree then set it to current value and then delete it on the "right" it will and must be in right
+                int smallest = minValue(currentNode.right);
+                currentNode.value = smallest;
+                currentNode.right = deleteNode(currentNode.right, smallest);
+            }
+        }
+        return currentNode;
+    }
+
+    private int minValue(Node currentNode) {
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode.value;
+    }
 }

@@ -5,8 +5,10 @@ public class Main {
         BinarySearchTree bst=new BinarySearchTree();
         bst.rInsert(1);
         bst.rInsert(3);
+        bst.rInsert(7);
+        System.out.println(bst.root.right.right.value);
+        bst.deleteNode(7);
         bst.rInsert(5);
-        bst.rInsert(0);
-        System.out.println(bst.root.left.value);
+        System.out.println(bst.root.right.right.value);
     }
 }
