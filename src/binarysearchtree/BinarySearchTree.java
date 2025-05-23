@@ -188,4 +188,45 @@ public class BinarySearchTree {
         invertTree(node.right);
         return node;
     }
+
+    private Node sortedArrayToBST(int[] nums, int left, int right) {
+        // Base case: if the left index exceeds the right,
+        // it means the sub-array is empty. Return null
+        // to indicate no node should be created at this level.
+        if (left > right) return null;
+
+        // Find the middle element of the current sub-array.
+        // This element will be the root of the subtree formed
+        // by this sub-array. This choice ensures the resulting
+        // BST is balanced. The middle element is chosen by
+        // calculating the average of the left and right indices,
+        // adjusting for integer division. This also ensures that
+        // in cases where the sub-array has an even number of elements,
+        // the left subtree will not have fewer nodes than the right subtree.
+        int mid = left + (right - left) / 2;
+
+        // Create a new node with the value of the middle element.
+        // This node will be the root of the subtree for the current
+        // recursive call.
+        Node node = new Node(nums[mid]);
+
+        // Recursively build the left subtree by using the portion
+        // of the array that's to the left of the middle element.
+        // The current middle element's index is adjusted by one to the left
+        // to exclude it from the left sub-array. This recursive call
+        // will continue until the base case is reached for the left side.
+        node.left = sortedArrayToBST(nums, left, mid - 1);
+
+        // Similarly, recursively build the right subtree by using
+        // the portion of the array that's to the right of the middle element.
+        // The current middle element's index is adjusted by one to the right
+        // to exclude it from the right sub-array. This recursive call
+        // will continue until the base case is reached for the right side.
+        node.right = sortedArrayToBST(nums, mid + 1, right);
+
+        // Return the node. At the end of recursion, this node will be
+        // the root of a balanced binary search tree constructed from
+        // the input array.
+        return node;
+    }
 }
