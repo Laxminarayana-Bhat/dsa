@@ -1,6 +1,6 @@
 package binarysearchtree;
 
-import java.util.Stack;
+import java.util.*;
 
 public class BinarySearchTree {
     //cant have duplicates
@@ -228,5 +228,23 @@ public class BinarySearchTree {
         // the root of a balanced binary search tree constructed from
         // the input array.
         return node;
+    }
+
+    public List<Integer> bfs(){
+        Node current=root;
+        Queue<Node> q=new LinkedList<>();
+        List<Integer> res=new ArrayList<>();
+        q.add(current);
+        while (!q.isEmpty()){
+            current=q.remove();
+            res.add(current.value);
+            if (current.left!=null){
+                q.add(current.left);
+            }
+            if (current.right!=null){
+                q.add(current.right);
+            }
+        }
+        return res;
     }
 }
