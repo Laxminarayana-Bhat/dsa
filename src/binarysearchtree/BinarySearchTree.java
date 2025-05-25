@@ -164,26 +164,26 @@ public class BinarySearchTree {
         return node;
     }
 
-    private Node invertTree(Node node){
-        if(node==null)return null;
-        Stack<Node> stack=new Stack<>();
+    private Node invertTree(Node node) {
+        if (node == null) return null;
+        Stack<Node> stack = new Stack<>();
         stack.push(node);
-        while(!stack.isEmpty()){
-            Node temp=stack.pop();
-            Node t=temp.left;
-            temp.left=temp.right;
-            temp.right=t;
-            if(temp.left!=null)stack.push(temp.left);
-            if(temp.right!=null)stack.push(temp.right);
+        while (!stack.isEmpty()) {
+            Node temp = stack.pop();
+            Node t = temp.left;
+            temp.left = temp.right;
+            temp.right = t;
+            if (temp.left != null) stack.push(temp.left);
+            if (temp.right != null) stack.push(temp.right);
         }
         return node;
     }
 
-    private Node RinvertTree(Node node){
-        if(node==null)return null;
-        Node temp=node.left;
-        node.left=node.right;
-        node.right=temp;
+    private Node RinvertTree(Node node) {
+        if (node == null) return null;
+        Node temp = node.left;
+        node.left = node.right;
+        node.right = temp;
         invertTree(node.left);
         invertTree(node.right);
         return node;
@@ -230,21 +230,122 @@ public class BinarySearchTree {
         return node;
     }
 
-    public List<Integer> bfs(){
-        Node current=root;
-        Queue<Node> q=new LinkedList<>();
-        List<Integer> res=new ArrayList<>();
+    public List<Integer> bfs() {
+        Node current = root;
+        Queue<Node> q = new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
+        if (current == null) return res;
         q.add(current);
-        while (!q.isEmpty()){
-            current=q.remove();
+        while (!q.isEmpty()) {
+            current = q.remove();
             res.add(current.value);
-            if (current.left!=null){
+            if (current.left != null) {
                 q.add(current.left);
             }
-            if (current.right!=null){
+            if (current.right != null) {
                 q.add(current.right);
             }
         }
         return res;
     }
+
+    public List<Integer> dfsPreOrder() { //pre-order- root,left,right
+        List<Integer> result = new ArrayList<>();
+        class Traverse {
+            public Traverse(Node node) {
+                result.add(node.value);
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+            }
+        }
+        new Traverse(root);
+        return result;
+    }
+
+    public List<Integer> dfsPreOrder2() {
+        List<Integer> result = new ArrayList<>();
+        preOrderHelper(root, result);
+        return result;
+    }
+
+    private void preOrderHelper(Node node, List<Integer> result) {
+        if (node == null) return;
+        result.add(node.value);
+        preOrderHelper(node.left, result);
+        preOrderHelper(node.right, result);
+    }
+
+    public List<Integer> dfsPostOrder2() {
+        List<Integer> result = new ArrayList<>();
+        postOrderHelper(root, result);
+        return result;
+    }
+
+    private void postOrderHelper(Node node, List<Integer> result) {
+        if (node == null) return;
+        postOrderHelper(node.left, result);
+        postOrderHelper(node.right, result);
+        result.add(node.value);
+    }
+
+    public List<Integer> dfsPostOrder() { //pre-order- root,left,right
+        List<Integer> result = new ArrayList<>();
+        class Traverse {
+            public Traverse(Node node) {
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+                result.add(node.value);
+            }
+        }
+        new Traverse(root);
+        return result;
+    }
+
+    public List<Integer> dfsInOrder2() {
+        List<Integer> result = new ArrayList<>();
+        inOrderHelper(root, result);
+        return result;
+    }
+
+    private void inOrderHelper(Node node, List<Integer> result) {
+        if (node == null) return;
+        postOrderHelper(node.left, result);
+        result.add(node.value);
+        postOrderHelper(node.right, result);
+    }
+
+    public List<Integer> dfsInOrder() { //pre-order- root,left,right
+        List<Integer> result = new ArrayList<>();
+        class Traverse {
+            public Traverse(Node node) {
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                result.add(node.value);
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+
+            }
+        }
+        new Traverse(root);
+        return result;
+    }
+
+    public boolean isValidBST() {//in inorder traversal have elements in ascending order, so just check the order and BINGO
+        List<Integer> ans = dfsInOrder();
+        for (int i = 0; i < ans.size() - 1; i++) {
+            if (ans.get(i) >= ans.get(i + 1)) return false;
+        }
+        return true;
+    }
+
 }
