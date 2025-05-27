@@ -348,4 +348,35 @@ public class BinarySearchTree {
         return true;
     }
 
+    public Integer kthSmallest(int k) {//more efficient as it return the value when we get directly and no need to traverse entire tree
+        Stack<Node> s = new Stack<>();
+        Node temp = root;
+        while (temp != null || !s.isEmpty()) {
+            while (temp != null) {
+                s.push(temp);
+                temp = temp.left;
+            }
+            temp = s.pop();
+            k--;
+            if (k == 0) {
+                return temp.value;
+            }
+            temp = temp.right;
+        }
+        return null;
+    }
+
+    public Integer rKthSmallest(int k) {
+        List<Integer> ans = dfsInOrder();
+        if (k > ans.size() || k <= 0) {
+            return null;
+        }
+        return ans.get(k - 1);
+    }
+
+    public Integer maxDepth(Node node) {
+        if (node == null) return 0;
+        return Math.max(maxDepth(node.left), maxDepth(node.right));
+    }
+
 }
