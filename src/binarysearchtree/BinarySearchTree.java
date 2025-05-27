@@ -379,4 +379,27 @@ public class BinarySearchTree {
         return Math.max(maxDepth(node.left), maxDepth(node.right));
     }
 
+    class kthSmall {
+
+        int count = 0;
+        int ans = -1;
+
+        public int kthSmallest(Node root, int k) {
+            inorder(root, k);
+            return ans;
+        }
+
+        void inorder(Node node, int k) {
+            if (node == null) return;
+            inorder(node.left, k);
+            count++;
+            if (count == k) {
+                ans = node.value;
+                return;
+            }
+
+            inorder(node.right, k);
+        }
+    }
+
 }
