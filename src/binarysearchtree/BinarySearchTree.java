@@ -348,58 +348,44 @@ public class BinarySearchTree {
         return true;
     }
 
-    public Integer kthSmallest(int k) {//more efficient as it return the value when we get directly and no need to traverse entire tree
-        Stack<Node> s = new Stack<>();
-        Node temp = root;
-        while (temp != null || !s.isEmpty()) {
-            while (temp != null) {
-                s.push(temp);
-                temp = temp.left;
+    public List<List<Integer>> levelOrder(Node root) {//bfs level by level adding
+        Queue<Node> q=new LinkedList<>();
+        List<List<Integer>> list=new ArrayList<>();
+        if(root==null)return list;
+        q.offer(root);
+        int lvl=0;
+        while(q.size()!=0){
+            int len=q.size();
+            list.add(new ArrayList<>());
+            for(int i=0;i<len;i++){
+                Node node=q.poll();
+                list.get(lvl).add(node.value);
+                if(node.left!=null){
+                    q.offer(node.left);
+                }
+                if(node.right!=null){
+                    q.offer(node.right);
+                }
             }
-            temp = s.pop();
-            k--;
-            if (k == 0) {
-                return temp.value;
-            }
-            temp = temp.right;
+            lvl++;
         }
-        return null;
+        return list;
     }
 
-    public Integer rKthSmallest(int k) {
-        List<Integer> ans = dfsInOrder();
-        if (k > ans.size() || k <= 0) {
-            return null;
-        }
-        return ans.get(k - 1);
+    public List<List<Integer>> rLevelOrder(Node root) {
+        List<List<Integer>> list=new ArrayList<>();
+        level(root,0,list);
+        return list;
     }
 
-    public Integer maxDepth(Node node) {
-        if (node == null) return 0;
-        return Math.max(maxDepth(node.left), maxDepth(node.right));
-    }
-
-    class kthSmall {
-
-        int count = 0;
-        int ans = -1;
-
-        public int kthSmallest(Node root, int k) {
-            inorder(root, k);
-            return ans;
+    public void level(Node node,int lvl, List<List<Integer>> list){
+        if(node==null)return;
+        if(list.size()<=lvl){
+            list.add(new ArrayList<>());
         }
-
-        void inorder(Node node, int k) {
-            if (node == null) return;
-            inorder(node.left, k);
-            count++;
-            if (count == k) {
-                ans = node.value;
-                return;
-            }
-
-            inorder(node.right, k);
-        }
+        list.get(lvl).add(node.value);
+        level(node.left,lvl+1,list);
+        level(node.right,lvl+1,list);
     }
 
 }
