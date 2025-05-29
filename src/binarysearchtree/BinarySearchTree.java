@@ -388,4 +388,41 @@ public class BinarySearchTree {
         level(node.right,lvl+1,list);
     }
 
+    public List<Integer> rightSideView(Node root) {
+        Queue<Node> q=new LinkedList<>();
+        List<Integer> ans=new ArrayList<>();
+        if(root==null)return ans;
+        q.offer(root);
+        while(!q.isEmpty()){
+            int val=q.size();
+            for(int i=0;i<val;i++){
+                Node node=q.poll();
+                if(i==val-1)
+                    ans.add(node.value);
+                if(node.left!=null){
+                    q.offer(node.left);
+                }
+                if(node.right!=null){
+                    q.offer(node.right);
+                }
+            }
+        }
+        return ans;
+    }
+
+    public List<Integer> rRightSideView(Node root) {
+        List<Integer> ans=new ArrayList<>();
+        helper(root,0,ans);
+        return ans;
+    }
+
+    public void helper(Node node,int lvl,List<Integer> ans){
+        if(node==null)return;
+        if(lvl==ans.size()){
+            ans.add(node.value);
+        }
+        helper(node.right,lvl+1,ans);
+        helper(node.left,lvl+1,ans);
+    }
+
 }
