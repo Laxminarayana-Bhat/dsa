@@ -425,4 +425,20 @@ public class BinarySearchTree {
         helper(node.left,lvl+1,ans);
     }
 
+    int count=0;
+    public int goodNodes(Node root) {
+        helper(root,root.value);
+        return count;
+    }
+
+    public void helper(Node node,int num){
+        if(node==null)return;
+        if(node.value>=num){
+            count++;
+        }
+        num=Math.max(num,node.value);
+        helper(node.left,num);
+        helper(node.right,num);
+    }
+
 }
