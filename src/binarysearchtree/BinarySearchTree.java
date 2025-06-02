@@ -464,4 +464,28 @@ public class BinarySearchTree {
             return root;
     }
 
+//    🧠 Hint:
+//    The first element of the preorder array is always the root of the tree.
+//    In the inorder array, elements to the left of the root belong to the left subtree, and elements to the right belong to the right subtree.
+//    Use recursion to construct the left and right subtrees.
+
+    Map<Integer,Integer>map=new HashMap<>();
+    int preidx=0;
+    public Node buildTree(int[] preorder, int[] inorder) {
+        for(int i=0;i<inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        return helper(preorder,0,preorder.length-1);
+    }
+
+    public Node helper(int[] preorder,int left,int right){
+        if(left>right)return null;
+        int rootval=preorder[preidx++];//just to get the value using index
+        Node root=new Node(rootval);
+        int index=map.get(rootval);
+        root.left=helper(preorder,left,index-1);
+        root.right=helper(preorder,index+1,right);
+        return root;
+    }
+
 }
