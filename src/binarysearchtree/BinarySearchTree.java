@@ -488,4 +488,18 @@ public class BinarySearchTree {
         return root;
     }
 
+    int dia=0;
+    public int diameterOfBinaryTree(Node root) {
+        helper(root);
+        return dia;
+    }
+
+    public int helper(Node node){
+        if(node==null)return 0;
+        int left=helper(node.left);
+        int right=helper(node.right);
+        dia=Math.max(left+right,dia);
+        return 1+Math.max(left,right);
+    }
+
 }
