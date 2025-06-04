@@ -8,7 +8,6 @@ public class Main {
         int[] arr = {9, 7, 5, 3, 1};
 //        Sort.bubbleSort(arr);
 //        Sort.selectionSort(arr);
-        Sort.insertionSortActual(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(Sort.mergeSort(arr)));
     }
 }

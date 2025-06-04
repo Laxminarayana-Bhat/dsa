@@ -1,5 +1,7 @@
 package sort;
 
+import java.util.Arrays;
+
 public class Sort {
     public static void KindOfSelectionSort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
@@ -61,8 +63,8 @@ public class Sort {
             int temp = arr[i];
             int j = i - 1;
             while (j >= 0 && temp < arr[j]) {
-                arr[j+1] = arr[j];
-                arr[j]=temp;
+                arr[j + 1] = arr[j];
+                arr[j] = temp;
                 j--;
             }
         }
@@ -73,10 +75,10 @@ public class Sort {
             int temp = arr[i];
             int j = i - 1;
             while (j >= 0 && temp < arr[j]) {
-                arr[j+1] = arr[j];
+                arr[j + 1] = arr[j];
                 j--;
             }
-            arr[j+1]=temp;
+            arr[j + 1] = temp;
         }
     }
 
@@ -127,5 +129,35 @@ public class Sort {
     📝 Time Complexity: Always O(n²), regardless of initial order
 
      */
+
+    public static int[] mergeSort(int[] arr) {
+        if (arr.length==1)return arr;
+        int mid= arr.length/2;
+        int[] left=mergeSort(Arrays.copyOfRange(arr,0,mid));
+        int[] right=mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
+        return merge(left,right);
+    }
+
+    private static int[] merge(int[] arr1, int[] arr2) {
+        int[] combined = new int[arr1.length + arr2.length];
+        int index = 0;
+        int i = 0;
+        int j = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                combined[index++] = arr1[i++];
+            } else {
+                combined[index++] = arr2[j++];
+            }
+
+        }
+        while (i < arr1.length) {
+            combined[index++] = arr1[i++];
+        }
+        while (j < arr2.length) {
+            combined[index++] = arr2[j++];
+        }
+        return combined;
+    }
 
 }
