@@ -469,37 +469,68 @@ public class BinarySearchTree {
 //    In the inorder array, elements to the left of the root belong to the left subtree, and elements to the right belong to the right subtree.
 //    Use recursion to construct the left and right subtrees.
 
-    Map<Integer,Integer>map=new HashMap<>();
-    int preidx=0;
+    Map<Integer, Integer> map = new HashMap<>();
+    int preidx = 0;
+
     public Node buildTree(int[] preorder, int[] inorder) {
-        for(int i=0;i<inorder.length;i++){
-            map.put(inorder[i],i);
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
         }
-        return helper(preorder,0,preorder.length-1);
+        return helper(preorder, 0, preorder.length - 1);
     }
 
-    public Node helper(int[] preorder,int left,int right){
-        if(left>right)return null;
-        int rootval=preorder[preidx++];//just to get the value using index
-        Node root=new Node(rootval);
-        int index=map.get(rootval);
-        root.left=helper(preorder,left,index-1);
-        root.right=helper(preorder,index+1,right);
+    public Node helper(int[] preorder, int left, int right) {
+        if (left > right) return null;
+        int rootval = preorder[preidx++];//just to get the value using index
+        Node root = new Node(rootval);
+        int index = map.get(rootval);
+        root.left = helper(preorder, left, index - 1);
+        root.right = helper(preorder, index + 1, right);
         return root;
     }
 
-    int dia=0;
+    int dia = 0;
+
     public int diameterOfBinaryTree(Node root) {
         helper(root);
         return dia;
     }
 
-    public int helper(Node node){
-        if(node==null)return 0;
-        int left=helper(node.left);
-        int right=helper(node.right);
-        dia=Math.max(left+right,dia);
-        return 1+Math.max(left,right);
+    public int helper(Node node) {
+        if (node == null) return 0;
+        int left = helper(node.left);
+        int right = helper(node.right);
+        dia = Math.max(left + right, dia);
+        return 1 + Math.max(left, right);
+    }
+
+
+    /*
+      The path sum of a path is the sum of the node's values in the path.
+
+         A
+        / \
+       B   C
+     If you're at A:
+
+     You can take the full path B → A → C (this is allowed once).
+
+     But when passing a value up to A’s parent, you can only choose one path: either A → B or A → C (whichever is higher).
+     */
+    int sum = Integer.MIN_VALUE;
+
+    public int maxPathSum(Node rooot) {
+        rhelper(root);
+        return sum;
+    }
+
+    public int rhelper(Node node) {
+        if (node == null) return 0;
+        int left = Math.max(0, rhelper(node.left));
+        int right = Math.max(0, rhelper(node.right));
+        int cur = node.value + left + right;
+        sum = Math.max(sum, cur);
+        return node.value + Math.max(left, right);
     }
 
 }
