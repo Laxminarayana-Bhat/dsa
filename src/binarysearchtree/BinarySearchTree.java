@@ -552,4 +552,18 @@ public class BinarySearchTree {
         return Math.max(left,right)+1;
     }
 
+    public boolean isSubtree(Node root, Node subRoot) {
+        if(root==null)return false;
+        if(subhelper(root,subRoot))return true;
+        return isSubtree(root.left,subRoot)||isSubtree(root.right,subRoot);
+    }
+
+    //code to check whether 2 tree are same
+    public boolean subhelper(Node root,Node sub){
+        if(root==null&&sub==null)return true;
+        if(root==null||sub==null)return false;
+        if(root.value!=sub.value)return false;
+        return subhelper(root.left,sub.left)&&subhelper(root.right,sub.right);
+    }
+
 }
