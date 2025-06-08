@@ -533,4 +533,23 @@ public class BinarySearchTree {
         return node.value + Math.max(left, right);
     }
 
+    //keep finding the height, if left-right >1 return -1 at any level
+    public boolean isBalanced(Node root) {
+        return rrhelper(root)!=-1;
+    }
+    public int rrhelper(Node root){
+        if(root==null)return 0;//height helper
+
+        int left=helper(root.left);
+        if(left==-1)return -1;
+        int right=helper(root.right);
+        if(right==-1)return -1;
+
+        //rule to check balanced or not
+        if(Math.abs(left-right)>1)return -1;
+
+        //height
+        return Math.max(left,right)+1;
+    }
+
 }
