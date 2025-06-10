@@ -131,11 +131,11 @@ public class Sort {
      */
 
     public static int[] mergeSort(int[] arr) {
-        if (arr.length==1)return arr;
-        int mid= arr.length/2;
-        int[] left=mergeSort(Arrays.copyOfRange(arr,0,mid));
-        int[] right=mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
-        return merge(left,right);
+        if (arr.length == 1) return arr;
+        int mid = arr.length / 2;
+        int[] left = mergeSort(Arrays.copyOfRange(arr, 0, mid));
+        int[] right = mergeSort(Arrays.copyOfRange(arr, mid, arr.length));
+        return merge(left, right);
     }
 
     private static int[] merge(int[] arr1, int[] arr2) {
@@ -158,6 +158,51 @@ public class Sort {
             combined[index++] = arr2[j++];
         }
         return combined;
+    }
+
+    //Quick Sort
+    /*
+    start with a pivot in the beginning
+    check next element grater than the pivot indexed element
+    if yes increase swap index
+    else do nothing
+    then we will get one pivot index
+    with that use divide and conquer method
+    go to both left and right of the pivot index until left<right become false
+    ex:
+    //{9, 7, 5, 3, 1}
+    //[1, 7, 5, 3, 9]
+    after 1st step
+     */
+    private static void swap(int[] arr1, int index1, int index2) {
+        int temp = arr1[index1];
+        arr1[index1] = arr1[index2];
+        arr1[index2] = temp;
+    }
+
+    public static int pivot(int[] arr, int pivotIndex, int endIndex) {
+        int swapIndex = pivotIndex;
+        for (int i = pivotIndex + 1; i <= endIndex; i++) {
+            if (arr[i] < arr[pivotIndex]) {
+                swapIndex++;
+                swap(arr, swapIndex, i);
+            }
+        }
+        swap(arr, swapIndex, pivotIndex);
+        return swapIndex;
+    }
+
+    private static void quickSortHelper(int[] arr, int left, int right) {
+        if (left < right) {
+            System.out.println(Arrays.toString(arr));
+            int pivot = pivot(arr, left, right);
+            quickSortHelper(arr, left, pivot - 1);
+            quickSortHelper(arr, pivot + 1, right);
+        }
+    }
+
+    public static void quickSort(int[] arr) {
+        quickSortHelper(arr, 0, arr.length - 1);
     }
 
 }
