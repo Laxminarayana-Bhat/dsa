@@ -1,13 +1,15 @@
 package dp;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-    import java.util.Set;
+import java.util.Set;
 
 public class DP {
 
     class Solution {
         public int fib(int n) {
-            Integer[] memo = new Integer[n+1];
+            Integer[] memo = new Integer[n + 1];
             return fibHelper(n, memo);
         }
 
@@ -21,17 +23,17 @@ public class DP {
 
     class Solution2 {
         public int climbStairs(int n) {
-            Integer[] memo=new Integer[n+1];
-            memo[1]=1;
-            memo[2]=2;
-            return helper(memo,n);
+            Integer[] memo = new Integer[n + 1];
+            memo[1] = 1;
+            memo[2] = 2;
+            return helper(memo, n);
         }
 
-        public static int helper(Integer[] memo,int n){
-            if(memo[n]!=null){
+        public static int helper(Integer[] memo, int n) {
+            if (memo[n] != null) {
                 return memo[n];
             }
-            memo[n]=helper(memo,n-1)+helper(memo,n-2);
+            memo[n] = helper(memo, n - 1) + helper(memo, n - 2);
             return memo[n];
         }
     }
@@ -55,16 +57,64 @@ public class DP {
 
     class SolutionBottomUp {
         public int minCostClimbingStairs(int[] cost) {
-            int n=cost.length;
-            int mincost[] = new int[n+1];
-            if(n==0||n==1){
+            int n = cost.length;
+            int mincost[] = new int[n + 1];
+            if (n == 0 || n == 1) {
                 return 0;
             }
-            for(int i=2;i<=n;i++){
-                mincost[i]=Math.min((cost[i-1]+mincost[i-1]),(cost[i-2]+mincost[i-2]));
+            for (int i = 2; i <= n; i++) {
+                mincost[i] = Math.min((cost[i - 1] + mincost[i - 1]), (cost[i - 2] + mincost[i - 2]));
             }
             return mincost[n];
         }
+    }
+
+    class Solution3 {
+        //house robber - end to start explore
+        //Robber can rob the house in only 2 ways
+        // - robbery of current house + loot from houses before the previous(n-2)
+        // - loot from the previous house(n-1) robbery and any loot captured before that(recursive one)
+        //rob(i) = Math.max(rob(i - 2) + currentHouseValue, rob(i - 1))
+
+        //Recursive + memo (top-down)
+        public int rob(int[] nums) {
+            Integer[] memo = new Integer[nums.length + 1];
+            return robber(nums, nums.length - 1, memo);
+        }
+
+        public static int robber(int[] nums, int n, Integer[] memo) {
+            if (n < 0) {
+                return 0;
+            }
+            if (memo[n] != null) {
+                return memo[n];
+            }
+            memo[n] = Math.max(robber(nums, n - 1, memo), robber(nums, n - 2, memo) + nums[n]);
+            return memo[n];
+        }
+    }
+
+    //Iterative + memo (bottom-up)
+    public static int robber(int[] nums, int n) {
+        Integer[] memo = new Integer[nums.length + 1];
+        memo[0] = 0;
+        memo[1] = nums[0];
+        for (int i = 2; i <= nums.length; i++) {
+            memo[i] = Math.max(memo[i - 1], memo[i - 2] + nums[i - 1]);
+        }
+        return memo[nums.length];
+    }
+
+    //Iterative + 2 variables
+    public int rob(int[] nums) {
+        int v1=0;//for n-1
+        int v2=0;//for n-2
+        for(int i:nums){
+            int tmp=v1;
+            v1=Math.max(v1,v2+i);//for every value check n-1 and current+n-2 and get max val
+            v2=tmp;//add n-1 to n-2 fr next loop
+        }
+        return v1;
     }
 }
 
