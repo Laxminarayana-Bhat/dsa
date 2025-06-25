@@ -107,14 +107,66 @@ public class DP {
 
     //Iterative + 2 variables
     public int rob(int[] nums) {
-        int v1=0;//for n-1
-        int v2=0;//for n-2
-        for(int i:nums){
-            int tmp=v1;
-            v1=Math.max(v1,v2+i);//for every value check n-1 and current+n-2 and get max val
-            v2=tmp;//add n-1 to n-2 fr next loop
+        int v1 = 0;//for n-1
+        int v2 = 0;//for n-2
+        for (int i : nums) {
+            int tmp = v1;
+            v1 = Math.max(v1, v2 + i);//for every value check n-1 and current+n-2 and get max val
+            v2 = tmp;//add n-1 to n-2 fr next loop
         }
         return v1;
+    }
+
+
+    //house robber II
+    //here nums is circular so first and last element is adjecent
+    //so we have to consider from 1st element to last-1 and 2nd element to last - and take the max to rob the max money
+    // max( rob (0,n-2), rob (1,n-1) )
+    class Solution4 {
+        public int rob(int[] nums) {
+            int n = nums.length;
+            if (n == 1) return nums[0];
+            Integer[] memo1 = new Integer[n + 1];
+            Integer[] memo2 = new Integer[n + 1];
+            return Math.max(robber(memo1, 0, n - 2, nums), robber(memo2, 1, n - 1, nums));
+        }
+
+        // from end , top to bottom with memo
+        public static int robber(Integer[] memo, int start, int end, int[] nums) {
+            if (end < start)
+                return 0;
+            if (memo[end] != null)
+                return memo[end];
+            memo[end] = Math.max(robber(memo, start, end - 1, nums), robber(memo, start, end - 2, nums) + nums[end]);
+            return memo[end];
+        }
+
+        // from start, top to bottom with memo
+        public static int robberFromStart(Integer[] memo, int start, int end, int[] nums) {
+            if (end < start)
+                return 0;
+            if (memo[start] != null)
+                return memo[start];
+            memo[start] = Math.max(robber(memo, start + 1, end, nums), robber(memo, start + 2, end, nums) + nums[start]);
+            return memo[start];
+        }
+
+        // memo + bottom up iterative
+        private int robDP(int[] nums, int start, int end) {
+            int n = end - start + 1;
+            if (n == 0) return 0;
+            if (n == 1) return nums[start];
+
+            int[] dp = new int[n];
+            dp[0] = nums[start];
+            dp[1] = Math.max(nums[start], nums[start + 1]);
+
+            for (int i = 2; i < n; i++) {
+                dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[start + i]);
+            }
+
+            return dp[n - 1];
+        }
     }
 }
 
