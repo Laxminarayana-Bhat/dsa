@@ -1,9 +1,6 @@
 package dp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 public class DP {
 
@@ -168,5 +165,57 @@ public class DP {
             return dp[n - 1];
         }
     }
+
+    class SolutionMinCoin {
+        public int coinChange(int[] coins, int amount) {
+            int[] memo = new int[amount + 1];
+            if (amount < 1)
+                return 0;
+            memo[0] = 0;
+            for (int amt = 1; amt <= amount; amt++) {
+                memo[amt] = Integer.MAX_VALUE;
+                for (int coin : coins) {
+                    if (coin <= amt && memo[amt - coin] != Integer.MAX_VALUE) {
+                        memo[amt] = Math.min(memo[amt]/* above we initialized */, memo[amt - coin] + 1);//+1 is required for below example
+                    }
+                }
+            }
+            //i = 1
+            //Try coins [1,5,6,9]:
+            //
+            //1: valid → memo[1] = min(MAX, memo[0] + 1) = 0 + 1 = 1
+            //
+            //5,6,9: all > 1 → skip
+            //
+            //memo[1] = 1
+
+            return memo[amount] > amount ? -1 : memo[amount];
+        }
+
+        public int coinChange2(int[] coins, int amount){//faster solution
+            int[] dp=new int[amount+1];
+             Arrays.fill(dp, amount + 1);  // initialize all as "infinity"
+             dp[0] = 0;  // base case
+
+             for (int coin : coins) {
+                 for (int i = coin; i <= amount; i++) {
+                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                 }
+             }
+             return dp[amount] > amount ? -1 : dp[amount];
+        }
+        // for [9] amt = 9
+        // i = 9:
+        //Coin 9 can be used:
+        //
+        //i - 9 = 0, and memo[0] = 0
+        //
+        //So:
+        //memo[9] = Math.min(Integer.MAX_VALUE, memo[0] + 1)
+        //→ memo[9] = 1
+        //
+        //✅ memo[9] = 1
+    }
+
 }
 
