@@ -204,5 +204,102 @@ public class Sort {
     public static void quickSort(int[] arr) {
         quickSortHelper(arr, 0, arr.length - 1);
     }
+    public static class MergeSort {
+
+    // Main mergeSort method that divides the array recursively
+    public static void mergeSort(int[] array, int left, int right) {
+        // Base condition: If the array has more than one element
+        if (left < right) {
+            // Find the middle point of the array
+            int mid = (left + right) / 2;
+
+            // Recursively sort the first half
+            mergeSort(array, left, mid);
+
+            // Recursively sort the second half
+            mergeSort(array, mid + 1, right);
+
+            // Merge the two sorted halves
+            merge(array, left, mid, right);
+        }
+    }
+
+    // Method to merge two sorted subarrays into one
+    public static void merge(int[] array, int left, int mid, int right) {
+        // Sizes of the two subarrays
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Create temporary arrays to hold the two halves
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Copy data into the temporary left array
+        for (int i = 0; i < n1; i++)
+            L[i] = array[left + i];
+
+        // Copy data into the temporary right array
+        for (int j = 0; j < n2; j++)
+            R[j] = array[mid + 1 + j];
+
+        // Initial indexes of the two subarrays
+        int i = 0, j = 0;
+
+        // Initial index of merged subarray
+        int k = left;
+
+        // Merge the temp arrays back into the main array
+        while (i < n1 && j < n2) {
+            // Compare and place the smaller element
+            if (L[i] <= R[j]) {
+                array[k] = L[i];
+                i++;
+            } else {
+                array[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy any remaining elements from L[] (if any)
+        while (i < n1) {
+            array[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // Copy any remaining elements from R[] (if any)
+        while (j < n2) {
+            array[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Utility method to print the array
+    public static void printArray(int[] array) {
+        for (int num : array)
+            System.out.print(num + " ");
+        System.out.println();
+    }
+
+    // Main method to test the merge sort
+    public static void main(String[] args) {
+        // Sample input array
+        int[] arr = {38, 27, 43, 3, 9, 82, 10};
+
+        // Print original array
+        System.out.println("Original Array:");
+        printArray(arr);
+
+        // Sort the array
+        mergeSort(arr, 0, arr.length - 1);
+
+        // Print sorted array
+        System.out.println("Sorted Array:");
+        printArray(arr);
+    }
+}
+
 
 }
