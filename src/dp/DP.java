@@ -192,17 +192,17 @@ public class DP {
             return memo[amount] > amount ? -1 : memo[amount];
         }
 
-        public int coinChange2(int[] coins, int amount){//faster solution
-            int[] dp=new int[amount+1];
-             Arrays.fill(dp, amount + 1);  // initialize all as "infinity"
-             dp[0] = 0;  // base case
+        public int coinChange2(int[] coins, int amount) {//faster solution
+            int[] dp = new int[amount + 1];
+            Arrays.fill(dp, amount + 1);  // initialize all as "infinity"
+            dp[0] = 0;  // base case
 
-             for (int coin : coins) {
-                 for (int i = coin; i <= amount; i++) {
-                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-                 }
-             }
-             return dp[amount] > amount ? -1 : dp[amount];
+            for (int coin : coins) {
+                for (int i = coin; i <= amount; i++) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+            return dp[amount] > amount ? -1 : dp[amount];
         }
         // for [9] amt = 9
         // i = 9:
@@ -215,6 +215,30 @@ public class DP {
         //→ memo[9] = 1
         //
         //✅ memo[9] = 1
+    }
+
+    abstract class Test {
+        int a;
+
+        public void display() {
+            System.out.println("jshdkjfha");
+        }
+
+        public int calc(int a, int b) {
+            return a;
+        }
+    }
+
+    class Test2 extends Test {
+        @Override
+        public int calc(int a, int b) {
+            return a + b;
+        }
+
+        @Override
+        public void display() {
+            System.out.println("override");
+        }
     }
 
 }
