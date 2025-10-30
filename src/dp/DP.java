@@ -1,6 +1,8 @@
 package dp;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class DP {
 
@@ -197,6 +199,7 @@ public class DP {
             Arrays.fill(dp, amount + 1);  // initialize all as "infinity"
             dp[0] = 0;  // base case
 
+
             for (int coin : coins) {
                 for (int i = coin; i <= amount; i++) {
                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
@@ -240,6 +243,43 @@ public class DP {
             System.out.println("override");
         }
     }
+
+    static class Solutionabc {
+
+
+        public static String encode(List<String> strs) {
+            if (strs.isEmpty()) return "";
+            String s = strs.toString();
+            if (s.length() > 1)
+                s = s.substring(1, s.length() - 1);
+            s = s.replaceAll("\"", "");
+            s=s+" ";
+            return s;
+        }
+
+        public static List<String> decode(String str) {
+            
+            List<String> ans = new ArrayList<>();
+            if (Objects.equals(str, "")){ans.add("");
+            return ans;}
+            String[] arr = str.split(",");
+            for (String s : arr) {
+                ans.add(s.trim());
+            }
+            return ans;
+        }
+
+        public static void main(String[] args) {
+            System.out.println("encoded - " + encode(List.of("")));
+            String enc = encode(List.of(""));
+            System.out.println(decode(enc));
+
+            System.out.println("encoded - " + encode(List.of()));
+            enc = encode(List.of());
+            System.out.println(decode(enc));
+        }
+    }
+
 
 }
 

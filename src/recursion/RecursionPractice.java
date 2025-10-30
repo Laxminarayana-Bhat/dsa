@@ -1,5 +1,8 @@
 package recursion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecursionPractice {
 
     RecursionPractice() {
@@ -27,5 +30,46 @@ public class RecursionPractice {
         printFibonacciRecursive(b, a + b, count - 1);
 
 
+    }
+
+    static class Solution {
+        //https://www.lavivienpost.com/combinations-of-adding-parentheses/
+        static List<String> ans = new ArrayList<>();
+
+        public static void generateParenthesis(int n) {
+            rec(n, 0, new StringBuilder());
+            ans.forEach(System.out::println);
+        }
+
+        public static void main(String[] args) {
+            generateParenthesis(3);
+        }
+
+        public static void rec(int open, int close, StringBuilder sb) {
+            // Print current recursion state
+            System.out.println("rec(open=" + open + ", close=" + close + ", sb=\"" + sb + "\")");
+
+            if (open == 0 && close == 0) {
+                System.out.println("✅ Found: " + sb.toString());
+                ans.add(sb.toString());
+                return;
+            }
+
+            if (open > 0) {
+                System.out.println("Adding '(' -> " + sb + "(");
+                sb.append("(");
+                rec(open - 1, close + 1, sb);
+                sb.deleteCharAt(sb.length() - 1);
+                System.out.println("Backtracked after '(' -> " + sb);
+            }
+
+            if (close > 0) {
+                System.out.println("Adding ')' -> " + sb + ")");
+                sb.append(")");
+                rec(open, close - 1, sb);
+                sb.deleteCharAt(sb.length() - 1);
+                System.out.println("Backtracked after ')' -> " + sb);
+            }
+        }
     }
 }
